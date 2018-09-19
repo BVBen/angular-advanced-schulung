@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FlightService} from '@flight-workspace/flight-api';
+import { BasketService } from '../../basket/basket.service';
 
 @Component({
   selector: 'flight-search',
@@ -16,15 +17,14 @@ export class FlightSearchComponent implements OnInit {
     return this.flightService.flights;
   }
 
-  // "shopping basket" with selected flights
-  basket: object = {
-    "3": true,
-    "5": true
-  };
+
 
   constructor(
-    private flightService: FlightService) {
-  }
+    private flightService: FlightService, private basketService: BasketService) {
+  }  
+  
+  // "shopping basket" with selected flights
+  basket: object = this.basketService.basket;
 
   ngOnInit() {
   }
