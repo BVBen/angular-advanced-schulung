@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../shared/auth/auth.service';
 
 @Component({
@@ -20,15 +20,15 @@ export class HomeComponent implements OnInit {
     this.needsLogin = !!this.route.snapshot.params['needsLogin'];
   }
 
-  get userName() {
+  get userName(): string {
     return this.authService.userName;
   }
 
-  login() {
+  login(): void {
     this.authService.login();
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
   }
 

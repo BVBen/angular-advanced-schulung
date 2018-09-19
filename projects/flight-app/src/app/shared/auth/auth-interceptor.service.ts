@@ -5,12 +5,13 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 import { Router } from '@angular/router';
+import { OAuthStorage } from 'angular-oauth2-oidc';
 
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private storage: OAuthStorage) {
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -18,8 +19,11 @@ export class AuthInterceptorService implements HttpInterceptor {
     // Important: Don't send out sensitive 
     //            security header to everyone!
     if (req.url.startsWith('http://www.angular.at')) {
-      let headers = req.headers.set('Authorization', 'Basic Just-for-Demonstration');
+      // let headers = req.headers.set('Authorization', 'Basic Just-for-Demonstration');
       // We will add a meaningful header later during the auth exercise!
+      let headers = req.headers
+                            .set('Authorization', 
+                                    'Bearer ' + this.storage.getItem('access_token'));
       req = req.clone({ headers });
     }
 
