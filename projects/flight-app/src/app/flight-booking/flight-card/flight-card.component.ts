@@ -10,7 +10,8 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import {Flight} from '@flight-workspace/flight-api';
+import { Flight } from '@flight-workspace/flight-api';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'flight-card',
@@ -23,7 +24,7 @@ export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
   @Input() selected: boolean;
   @Output() selectedChange = new EventEmitter<boolean>();
 
-  constructor(private element: ElementRef, private zone: NgZone) {
+  constructor(private element: ElementRef, private zone: NgZone, private translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -43,6 +44,10 @@ export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
   deselect() {
     this.selected = false;
     this.selectedChange.next(false);
+  }
+
+  get language() {
+    return this.translate.currentLang;
   }
 
   blink() {
