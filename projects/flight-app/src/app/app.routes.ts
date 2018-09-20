@@ -1,4 +1,4 @@
-import {ExtraOptions, Routes} from '@angular/router';
+import {ExtraOptions, Routes, PreloadAllModules} from '@angular/router';
 import {BasketComponent} from './basket/basket.component';
 import {HomeComponent} from './home/home.component';
 import { AirportComponent } from './airport/airport.component';
@@ -8,6 +8,10 @@ export const APP_ROUTES: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'flight-booking',
+    loadChildren: './flight-booking/flight-booking.module#FlightBookingModule'
   },
   {
     path: 'home',
@@ -25,5 +29,5 @@ export const APP_ROUTES: Routes = [
 ]
 
 export const APP_EXTRA_OPTIONS: ExtraOptions = {
-
+  preloadingStrategy: PreloadAllModules
 }

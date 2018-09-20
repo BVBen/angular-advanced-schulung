@@ -9,9 +9,15 @@ import { CanDeactivateGuard } from '../shared/deactivation/can-deactivate.guard'
 
 export const FLIGHT_BOOKING_ROUTES: Routes = [
   {
-    path: 'flight-booking',
+    path: '',
     component: FlightBookingComponent,
     children: [
+
+      {
+        path: '',
+        redirectTo: 'flight-search',
+        pathMatch: 'full'
+      },
       {
         path: 'flight-search',
         component: FlightSearchComponent
@@ -20,7 +26,6 @@ export const FLIGHT_BOOKING_ROUTES: Routes = [
       {
         path: 'passenger-search',
         component: PassengerSearchComponent,
-        canActivate: [AuthGuard],
       },
       {
         path: 'flight-edit/:id',
